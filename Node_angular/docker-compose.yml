@@ -7,4 +7,4 @@ services:
       - "4200:4200"
     volumes: 
       - "./server:/root/game"
-    tty: true
+    tty: true #コンテナの永続化
