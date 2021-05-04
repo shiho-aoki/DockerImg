@@ -24,6 +24,6 @@ services:
       DB_NAME: keep_cards
       DB_LOC: Asia%2FTokyo
     volumes:
-      - "./app:/app"
+      - "./app:/home/app"
     depends_on:
       - db
