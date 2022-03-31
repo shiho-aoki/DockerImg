@@ -1,16 +1,16 @@
-FROM golang:stretch as build-reflex
-RUN apt update && \
-    apt upgrade && \
-    apt install bash git && \
-    rm -rf /var/cache/apt/*
+# FROM golang:stretch as build-reflex
+# RUN apt update  -y && \
+#     apt upgrade -y && \
+#     apt install bash git -y && \
+#     rm -rf /var/cache/apt/*
 
-RUN go get github.com/cespare/reflex
+# RUN go get github.com/cespare/reflex
 
 FROM golang:stretch
-COPY --from=build-reflex /go/bin/reflex /go/bin/reflex
+# COPY --from=build-reflex /go/bin/reflex /go/bin/reflex
 
-RUN apt update && \
-    apt upgrade && \
+RUN apt update -y && \
+    apt upgrade -y && \
     apt install bash git build-essential jq -y && \
     rm -rf /var/cache/apt/*
 
