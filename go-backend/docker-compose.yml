@@ -16,7 +16,7 @@ services:
     volumes:
       - ./db/log/data:/var/lib/postgresql/data
       - ./db/log:/var/log
-      - ./db/migration/schema/init.sql :/docker-entrypoint-initdb.d/
+      - ./db/migration/schema/ :/docker-entrypoint-initdb.d/
     command: postgres -c log_statement=all
     tty: true
   
