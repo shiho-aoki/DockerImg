@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:11-alpine
+    container_name: postgres
+    ports:
+      - ${DB_PORT:-5432}:5432
+    environment:
+      POSTGRES_USER: ${DB_USEDR:-root}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-zSQYFrowY6EwCory}
+      POSTGRES_DB: ${POSTGRES_DB:-app_db}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_HOST_AUTH_METHOD: 'trust'
+    volumes:
+      - ./db/log/data:/var/lib/postgresql/data
+      - ./db/log:/var/log
+      - ./db/migration/schema/*.sql :/docker-entrypoint-initdb.d/
+    command: postgres -c log_statement=all
+  
+  api:
+    container_name: api
+    depends_on: 
+      - postgres
+    build: 
+      context: .
+      dockerfile: ./api/Dockerfile
+    environment:
+      - GOPATH=/go
+    volumes:
+      - ./ :/app/
