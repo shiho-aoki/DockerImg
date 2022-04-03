@@ -16,8 +16,9 @@ services:
     volumes:
       - ./db/log/data:/var/lib/postgresql/data
       - ./db/log:/var/log
-      - ./db/migration/schema/*.sql :/docker-entrypoint-initdb.d/
+      - ./db/migration/schema/init.sql :/docker-entrypoint-initdb.d/
     command: postgres -c log_statement=all
+    tty: true
   
   api:
     container_name: api
@@ -28,5 +29,7 @@ services:
       dockerfile: ./api/Dockerfile
     environment:
       - GOPATH=/go
-    volumes:
-      - ./ :/app/
+    ports:
+      - 8080:8080
+      - 80:80
+    tty: true

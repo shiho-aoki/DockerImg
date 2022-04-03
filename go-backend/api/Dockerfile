@@ -9,4 +9,6 @@ ENV GOOS=linux \
     GOARCH=amd64 \
     CGO_ENABLED=0
 
-WORKDIR /app/api
+WORKDIR /app
+
+COPY . .
