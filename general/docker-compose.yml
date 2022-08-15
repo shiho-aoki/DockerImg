@@ -1,0 +1,11 @@
+version: '3'
+services:
+  gnn:
+    container_name: gnn
+    build:
+      context: ./
+    tty: true
+    volumes:
+      - .:/work/gnn
+    ports:
+      - 8084:8084
